@@ -1,0 +1,25 @@
+.l-auth
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+    max-width: $layout-size-medium
+
+.b-preview
+    display: flex
+    flex-direction: column
+    padding: 20px
+    margin-bottom: 20px
+    color: $color-light
+
+    +element('logo')
+        margin:
+            right: 10px
+
+    +element('title')
+        font:
+            size: 48px
+
+    +element('description')
+        color: $color-dark
+        text-align: right
