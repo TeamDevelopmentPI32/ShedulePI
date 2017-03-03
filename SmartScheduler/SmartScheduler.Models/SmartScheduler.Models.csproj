@@ -54,6 +54,7 @@
     <Compile Include="DataContexts\Context\Auditories.cs" />
     <Compile Include="DataContexts\Context\ScheduleItems.cs" />
     <Compile Include="DataContexts\Context\Schedules.cs" />
+    <Compile Include="DataContexts\Context\SmartSchedulerContext.cs" />
     <Compile Include="DataContexts\Context\Subjects.cs" />
     <Compile Include="DataContexts\Context\MapHelper.cs" />
     <Compile Include="DataContexts\Context\Administrators.cs" />
