@@ -33,8 +33,16 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,7 +51,101 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DataContexts\Context\Auditories.cs" />
+    <Compile Include="DataContexts\Context\ScheduleItems.cs" />
+    <Compile Include="DataContexts\Context\Schedules.cs" />
+    <Compile Include="DataContexts\Context\Subjects.cs" />
+    <Compile Include="DataContexts\Context\MapHelper.cs" />
+    <Compile Include="DataContexts\Context\Administrators.cs" />
+    <Compile Include="DataContexts\Context\Groups.cs" />
+    <Compile Include="DataContexts\Context\TeacherRanks.cs" />
+    <Compile Include="DataContexts\Context\Teachers.cs" />
+    <Compile Include="DataContexts\Context\Students.cs" />
+    <Compile Include="DataContexts\Context\Users.cs" />
+    <Compile Include="DataContexts\DbAdministator.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbAuditory.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbGroup.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbRank.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbSchedule.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbScheduleItem.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbStudent.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbStudentsInGroup.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbSubject.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbTeacher.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DbUser.cs">
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\SmartSchedulerDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmartSchedulerDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\SmartSchedulerDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmartSchedulerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\SmartSchedulerDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmartSchedulerDbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Interfaces.cs" />
+    <Compile Include="Models\ScheduleItem.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DataContexts\SmartSchedulerDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SmartSchedulerDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DataContexts\SmartSchedulerDbModel.edmx.diagram">
+      <DependentUpon>SmartSchedulerDbModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataContexts\SmartSchedulerDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SmartSchedulerDbModel.edmx</DependentUpon>
+      <LastGenOutput>SmartSchedulerDbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataContexts\SmartSchedulerDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SmartSchedulerDbModel.edmx</DependentUpon>
+      <LastGenOutput>SmartSchedulerDbModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

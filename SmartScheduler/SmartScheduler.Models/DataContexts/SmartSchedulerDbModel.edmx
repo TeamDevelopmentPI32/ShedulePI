@@ -1,0 +1,750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SmartSchedulerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administator">
+          <Key>
+            <PropertyRef Name="administratorId" />
+          </Key>
+          <Property Name="administratorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="Auditory">
+          <Key>
+            <PropertyRef Name="auditoryId" />
+          </Key>
+          <Property Name="auditoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="groupId" />
+          </Key>
+          <Property Name="groupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rank">
+          <Key>
+            <PropertyRef Name="rankid" />
+          </Key>
+          <Property Name="rankid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rank" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="scheduleId" />
+          </Key>
+          <Property Name="scheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="ScheduleItem">
+          <Key>
+            <PropertyRef Name="scheduleItemId" />
+          </Key>
+          <Property Name="scheduleItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scheduleYear" Type="int" Nullable="false" />
+          <Property Name="scheduleId" Type="int" />
+          <Property Name="teacherId" Type="int" />
+          <Property Name="groupId" Type="int" />
+          <Property Name="auditoryId" Type="int" />
+          <Property Name="subjectId" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="middlename" Type="varchar" MaxLength="50" />
+          <Property Name="enteringYear" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentsInGroups">
+          <Key>
+            <PropertyRef Name="studentsInGroupsId" />
+          </Key>
+          <Property Name="studentsInGroupsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupId" Type="int" />
+          <Property Name="studentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="subjectId" />
+          </Key>
+          <Property Name="subjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="credits" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="teacherId" />
+          </Key>
+          <Property Name="teacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="middlename" Type="varchar" MaxLength="50" />
+          <Property Name="enteringYear" Type="int" Nullable="false" />
+          <Property Name="rankid" Type="int" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="regDate" Type="date" Nullable="false" />
+          <Property Name="lastActivityDate" Type="date" />
+        </EntityType>
+        <Association Name="FK__Administa__userI__1B0907CE">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Administator" Type="Self.Administator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Administator">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__audit__2C3393D0">
+          <End Role="Auditory" Type="Self.Auditory" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="Self.ScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auditory">
+              <PropertyRef Name="auditoryId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="auditoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__group__2B3F6F97">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="Self.ScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="groupId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__sched__29572725">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="Self.ScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="scheduleId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="scheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__subje__2D27B809">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="Self.ScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="subjectId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="subjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__teach__2A4B4B5E">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="Self.ScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="teacherId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="teacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__userId__145C0A3F">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentsI__group__1FCDBCEB">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="StudentsInGroups" Type="Self.StudentsInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="groupId" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentsI__stude__20C1E124">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentsInGroups" Type="Self.StudentsInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__rankid__173876EA">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="rankid" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="rankid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__userId__182C9B23">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SmartSchedulerModelContainer">
+          <EntitySet Name="Administator" EntityType="Self.Administator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Auditory" EntityType="Self.Auditory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rank" EntityType="Self.Rank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleItem" EntityType="Self.ScheduleItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentsInGroups" EntityType="Self.StudentsInGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Administa__userI__1B0907CE" Association="Self.FK__Administa__userI__1B0907CE">
+            <End Role="User" EntitySet="User" />
+            <End Role="Administator" EntitySet="Administator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__audit__2C3393D0" Association="Self.FK__ScheduleI__audit__2C3393D0">
+            <End Role="Auditory" EntitySet="Auditory" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__group__2B3F6F97" Association="Self.FK__ScheduleI__group__2B3F6F97">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__sched__29572725" Association="Self.FK__ScheduleI__sched__29572725">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__subje__2D27B809" Association="Self.FK__ScheduleI__subje__2D27B809">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__teach__2A4B4B5E" Association="Self.FK__ScheduleI__teach__2A4B4B5E">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__userId__145C0A3F" Association="Self.FK__Student__userId__145C0A3F">
+            <End Role="User" EntitySet="User" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentsI__group__1FCDBCEB" Association="Self.FK__StudentsI__group__1FCDBCEB">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentsI__stude__20C1E124" Association="Self.FK__StudentsI__stude__20C1E124">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__rankid__173876EA" Association="Self.FK__Teacher__rankid__173876EA">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__userId__182C9B23" Association="Self.FK__Teacher__userId__182C9B23">
+            <End Role="User" EntitySet="User" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmartSchedulerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DbAdministator">
+          <Key>
+            <PropertyRef Name="AdministratorId" />
+          </Key>
+          <Property Name="AdministratorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Administa__userI__1B0907CE" FromRole="Administator" ToRole="User" />
+        </EntityType>
+        <EntityType Name="DbAuditory">
+          <Key>
+            <PropertyRef Name="AuditoryId" />
+          </Key>
+          <Property Name="AuditoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ScheduleItems" Relationship="Self.FK__ScheduleI__audit__2C3393D0" FromRole="Auditory" ToRole="ScheduleItem" />
+        </EntityType>
+        <EntityType Name="DbGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ScheduleItems" Relationship="Self.FK__ScheduleI__group__2B3F6F97" FromRole="Group" ToRole="ScheduleItem" />
+          <NavigationProperty Name="StudentsInGroups" Relationship="Self.FK__StudentsI__group__1FCDBCEB" FromRole="Group" ToRole="StudentsInGroups" />
+        </EntityType>
+        <EntityType Name="DbRank">
+          <Key>
+            <PropertyRef Name="RankId" />
+          </Key>
+          <Property Name="RankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK__Teacher__rankid__173876EA" FromRole="Rank" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="DbSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ScheduleItems" Relationship="Self.FK__ScheduleI__sched__29572725" FromRole="Schedule" ToRole="ScheduleItem" />
+        </EntityType>
+        <EntityType Name="DbScheduleItem">
+          <Key>
+            <PropertyRef Name="ScheduleItemId" />
+          </Key>
+          <Property Name="ScheduleItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScheduleYear" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleId" Type="Int32" />
+          <Property Name="TeacherId" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="AuditoryId" Type="Int32" />
+          <Property Name="SubjectId" Type="Int32" />
+          <NavigationProperty Name="Auditory" Relationship="Self.FK__ScheduleI__audit__2C3393D0" FromRole="ScheduleItem" ToRole="Auditory" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__ScheduleI__group__2B3F6F97" FromRole="ScheduleItem" ToRole="Group" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__ScheduleI__sched__29572725" FromRole="ScheduleItem" ToRole="Schedule" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK__ScheduleI__subje__2D27B809" FromRole="ScheduleItem" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__ScheduleI__teach__2A4B4B5E" FromRole="ScheduleItem" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="DbStudent">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnteringYear" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Student__userId__145C0A3F" FromRole="Student" ToRole="User" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK__StudentsI__stude__20C1E124" FromRole="Student" ToRole="StudentsInGroups" />
+        </EntityType>
+        <EntityType Name="DbStudentsInGroup">
+          <Key>
+            <PropertyRef Name="StudentsInGroupsId" />
+          </Key>
+          <Property Name="StudentsInGroupsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="StudentId" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__StudentsI__group__1FCDBCEB" FromRole="StudentsInGroups" ToRole="Group" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__StudentsI__stude__20C1E124" FromRole="StudentsInGroups" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="DbSubject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Credits" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ScheduleItems" Relationship="Self.FK__ScheduleI__subje__2D27B809" FromRole="Subject" ToRole="ScheduleItem" />
+        </EntityType>
+        <EntityType Name="DbTeacher">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnteringYear" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Rank" Relationship="Self.FK__Teacher__rankid__173876EA" FromRole="Teacher" ToRole="Rank" />
+          <NavigationProperty Name="ScheduleItems" Relationship="Self.FK__ScheduleI__teach__2A4B4B5E" FromRole="Teacher" ToRole="ScheduleItem" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Teacher__userId__182C9B23" FromRole="Teacher" ToRole="User" />
+        </EntityType>
+        <EntityType Name="DbUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastActivityDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Administators" Relationship="Self.FK__Administa__userI__1B0907CE" FromRole="User" ToRole="Administator" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__userId__145C0A3F" FromRole="User" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK__Teacher__userId__182C9B23" FromRole="User" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK__Administa__userI__1B0907CE">
+          <End Role="User" Type="SmartSchedulerModel.DbUser" Multiplicity="0..1" />
+          <End Role="Administator" Type="SmartSchedulerModel.DbAdministator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Administator">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__audit__2C3393D0">
+          <End Role="Auditory" Type="SmartSchedulerModel.DbAuditory" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="SmartSchedulerModel.DbScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auditory">
+              <PropertyRef Name="AuditoryId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="AuditoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__group__2B3F6F97">
+          <End Role="Group" Type="SmartSchedulerModel.DbGroup" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="SmartSchedulerModel.DbScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentsI__group__1FCDBCEB">
+          <End Role="Group" Type="SmartSchedulerModel.DbGroup" Multiplicity="0..1" />
+          <End Role="StudentsInGroups" Type="SmartSchedulerModel.DbStudentsInGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__rankid__173876EA">
+          <End Role="Rank" Type="SmartSchedulerModel.DbRank" Multiplicity="0..1" />
+          <End Role="Teacher" Type="SmartSchedulerModel.DbTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__sched__29572725">
+          <End Role="Schedule" Type="SmartSchedulerModel.DbSchedule" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="SmartSchedulerModel.DbScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__subje__2D27B809">
+          <End Role="Subject" Type="SmartSchedulerModel.DbSubject" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="SmartSchedulerModel.DbScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleI__teach__2A4B4B5E">
+          <End Role="Teacher" Type="SmartSchedulerModel.DbTeacher" Multiplicity="0..1" />
+          <End Role="ScheduleItem" Type="SmartSchedulerModel.DbScheduleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="ScheduleItem">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__userId__145C0A3F">
+          <End Role="User" Type="SmartSchedulerModel.DbUser" Multiplicity="0..1" />
+          <End Role="Student" Type="SmartSchedulerModel.DbStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentsI__stude__20C1E124">
+          <End Role="Student" Type="SmartSchedulerModel.DbStudent" Multiplicity="0..1" />
+          <End Role="StudentsInGroups" Type="SmartSchedulerModel.DbStudentsInGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__userId__182C9B23">
+          <End Role="User" Type="SmartSchedulerModel.DbUser" Multiplicity="0..1" />
+          <End Role="Teacher" Type="SmartSchedulerModel.DbTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartSchedulerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administators" EntityType="SmartSchedulerModel.DbAdministator" />
+          <EntitySet Name="Auditories" EntityType="SmartSchedulerModel.DbAuditory" />
+          <EntitySet Name="Groups" EntityType="SmartSchedulerModel.DbGroup" />
+          <EntitySet Name="Ranks" EntityType="SmartSchedulerModel.DbRank" />
+          <EntitySet Name="Schedules" EntityType="SmartSchedulerModel.DbSchedule" />
+          <EntitySet Name="ScheduleItems" EntityType="SmartSchedulerModel.DbScheduleItem" />
+          <EntitySet Name="Students" EntityType="SmartSchedulerModel.DbStudent" />
+          <EntitySet Name="StudentsInGroups" EntityType="SmartSchedulerModel.DbStudentsInGroup" />
+          <EntitySet Name="Subjects" EntityType="SmartSchedulerModel.DbSubject" />
+          <EntitySet Name="Teachers" EntityType="SmartSchedulerModel.DbTeacher" />
+          <EntitySet Name="Users" EntityType="SmartSchedulerModel.DbUser" />
+          <AssociationSet Name="FK__Administa__userI__1B0907CE" Association="Self.FK__Administa__userI__1B0907CE">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Administator" EntitySet="Administators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__audit__2C3393D0" Association="Self.FK__ScheduleI__audit__2C3393D0">
+            <End Role="Auditory" EntitySet="Auditories" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__group__2B3F6F97" Association="Self.FK__ScheduleI__group__2B3F6F97">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentsI__group__1FCDBCEB" Association="Self.FK__StudentsI__group__1FCDBCEB">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__rankid__173876EA" Association="Self.FK__Teacher__rankid__173876EA">
+            <End Role="Rank" EntitySet="Ranks" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__sched__29572725" Association="Self.FK__ScheduleI__sched__29572725">
+            <End Role="Schedule" EntitySet="Schedules" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__subje__2D27B809" Association="Self.FK__ScheduleI__subje__2D27B809">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleI__teach__2A4B4B5E" Association="Self.FK__ScheduleI__teach__2A4B4B5E">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="ScheduleItem" EntitySet="ScheduleItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__userId__145C0A3F" Association="Self.FK__Student__userId__145C0A3F">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentsI__stude__20C1E124" Association="Self.FK__StudentsI__stude__20C1E124">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__userId__182C9B23" Association="Self.FK__Teacher__userId__182C9B23">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SmartSchedulerModelContainer" CdmEntityContainer="SmartSchedulerEntities">
+          <EntitySetMapping Name="Administators">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbAdministator">
+              <MappingFragment StoreEntitySet="Administator">
+                <ScalarProperty Name="AdministratorId" ColumnName="administratorId" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Surname" ColumnName="surname" />
+                <ScalarProperty Name="UserId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auditories">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbAuditory">
+              <MappingFragment StoreEntitySet="Auditory">
+                <ScalarProperty Name="AuditoryId" ColumnName="auditoryId" />
+                <ScalarProperty Name="Number" ColumnName="number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbGroup">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="GroupId" ColumnName="groupId" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ranks">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbRank">
+              <MappingFragment StoreEntitySet="Rank">
+                <ScalarProperty Name="RankId" ColumnName="rankid" />
+                <ScalarProperty Name="RankName" ColumnName="rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbSchedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="ScheduleId" ColumnName="scheduleId" />
+                <ScalarProperty Name="Number" ColumnName="number" />
+                <ScalarProperty Name="Date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleItems">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbScheduleItem">
+              <MappingFragment StoreEntitySet="ScheduleItem">
+                <ScalarProperty Name="ScheduleItemId" ColumnName="scheduleItemId" />
+                <ScalarProperty Name="ScheduleYear" ColumnName="scheduleYear" />
+                <ScalarProperty Name="ScheduleId" ColumnName="scheduleId" />
+                <ScalarProperty Name="TeacherId" ColumnName="teacherId" />
+                <ScalarProperty Name="GroupId" ColumnName="groupId" />
+                <ScalarProperty Name="AuditoryId" ColumnName="auditoryId" />
+                <ScalarProperty Name="SubjectId" ColumnName="subjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbStudent">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentId" ColumnName="studentId" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Surname" ColumnName="surname" />
+                <ScalarProperty Name="Middlename" ColumnName="middlename" />
+                <ScalarProperty Name="EnteringYear" ColumnName="enteringYear" />
+                <ScalarProperty Name="UserId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsInGroups">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbStudentsInGroup">
+              <MappingFragment StoreEntitySet="StudentsInGroups">
+                <ScalarProperty Name="StudentsInGroupsId" ColumnName="studentsInGroupsId" />
+                <ScalarProperty Name="GroupId" ColumnName="groupId" />
+                <ScalarProperty Name="StudentId" ColumnName="studentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbSubject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectId" ColumnName="subjectId" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Credits" ColumnName="credits" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbTeacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="TeacherId" ColumnName="teacherId" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Surname" ColumnName="surname" />
+                <ScalarProperty Name="Middlename" ColumnName="middlename" />
+                <ScalarProperty Name="EnteringYear" ColumnName="enteringYear" />
+                <ScalarProperty Name="RankId" ColumnName="rankid" />
+                <ScalarProperty Name="UserId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SmartSchedulerModel.DbUser">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="userId" />
+                <ScalarProperty Name="Login" ColumnName="login" />
+                <ScalarProperty Name="Password" ColumnName="password" />
+                <ScalarProperty Name="RegDate" ColumnName="regDate" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="lastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

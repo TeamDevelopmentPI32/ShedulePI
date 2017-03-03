@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2826231a77a94a9eaf5402bb84818ebc" Name="Diagram1">
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbAdministator" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbAuditory" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbGroup" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbRank" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbSchedule" Width="1.5" PointX="6" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbScheduleItem" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbStudent" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbStudentsInGroup" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbSubject" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbTeacher" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartSchedulerModel.DbUser" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__Administa__userI__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__ScheduleI__audit__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__ScheduleI__group__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__StudentsI__group__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__Teacher__rankid__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__ScheduleI__sched__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__ScheduleI__subje__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__ScheduleI__teach__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__Student__userId__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__StudentsI__stude__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartSchedulerModel.FK__Teacher__userId__182C9B23" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
