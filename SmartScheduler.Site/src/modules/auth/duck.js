@@ -1,5 +1,6 @@
-import Crud from '../../utils/api/crud';
-import API from '../../utils/api/paths';
+import API from '../../utils/api';
+import { SubmissionError } from 'redux-form';
+import axios from 'axios';
 
 // Actions
 const SIGNIN_REQUEST = 'ss/auth/SIGNIN_REQUEST';
@@ -9,7 +10,7 @@ const SIGNOUT = 'ss/auth/SIGNOUT';
 
 // Init state
 const initState = {
-    token: null,
+    profile: null,
 }
 
 // Reducer
@@ -21,8 +22,8 @@ const reducer = (state = initState, action) => {
         case SIGNIN_FAILURE: 
             return {
                 ...state,
-                token: action.token
-            }
+                profile: action.profile
+            };
         default:
             return state;
     }
@@ -33,33 +34,44 @@ const signInRequest = () => ({
     type: SIGNIN_REQUEST
 });
 
-const signInFulfilled = token => ({
+const signInFulfilled = profile => ({
     type: SIGNIN_FULFILLED,
-    token
+    profile
 });
 
 const signInFailure = () => ({
     type: SIGNIN_FAILURE,
-    token: null
+    profile: null
 });
-
 
 // Async actions
 const signIn = credentials => dispatch => {
-    dispatch(SIGNINRequest());
+    dispatch(signInRequest());
 
-    return Crud.post(API.auth.signIn)
+    // Create new instance of axios to prevent using general axios.config
+    const authAxios = axios.create();
+
+    const config = {
+        auth: {
+            username: credentials.username,
+            password: credentials.password
+        }
+    }
+
+    return authAxios.post(API.auth.signIn, null, config)
         .then(response => {
-            const token = response.data.token;
-            dispatch(SIGNINFulfilled(token));
+            const profile = response.data;
+            dispatch(signInFulfilled(profile));
         })
         .catch(error => {
-            dispatch(SIGNINFailure());
+            dispatch(signInFailure());
+
+            throw new SubmissionError({ username: 'An unexpeted error occured', password: 'An unexpected error occured' });
         });
 }
 
 const signOut = () => dispatch => {
-    return Crud.post(API.auth.signOut);
+    return axios.post(API.auth.signOut);
 }
 
 // Exports

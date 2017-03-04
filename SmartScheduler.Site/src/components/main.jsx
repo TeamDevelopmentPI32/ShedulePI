@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MainComponent = (props) => (
+const MainComponent = ({ children }) => (
     <div className="l-main">
-        { props.children }
+        { children }
     </div>
 );
 

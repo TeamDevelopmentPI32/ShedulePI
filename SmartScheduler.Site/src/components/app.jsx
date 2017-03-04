@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { default as Header } from './header';
 import { default as Main } from './main';
@@ -13,6 +13,5 @@ const App = ({ children }) => (
         <Footer />
     </div>
 );
-
 
 export default App;

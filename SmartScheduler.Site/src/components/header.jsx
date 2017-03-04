@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HeaderComponent = (props) => (
+const HeaderComponent = () => (
     <div className="l-header">
         Header
     </div>

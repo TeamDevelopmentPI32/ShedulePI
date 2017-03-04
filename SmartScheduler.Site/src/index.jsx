@@ -1,6 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+// Error interceptor & config creator
+import '../configs/axios.config';
+
 // Imports styles for the project
 import './sass';
 

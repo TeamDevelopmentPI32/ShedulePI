@@ -3,6 +3,10 @@
     border-radius: 3px
     color: $color-light
     margin: 2px;
+
+    &:disabled, &:disabled:hover
+        cursor: default
+        background: $color-gray
     
     +modifier('default')
         background: $bg-color-primary
@@ -11,4 +15,20 @@
         &:hover
             background: $color-light
             color: $bg-color-primary
+
+    +modifier('green')
+        background: $color-green
+        
+        &:hover
+            background: $color-green-darken
+
+    +modifier('orange')
+        background: $color-orange
+
+        &:hover
+            background: $color-orange-darken
+
+    +modifier('fill')
+        flex: 1
+
         

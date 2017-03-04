@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FooterComponent = (props) => (
+const FooterComponent = () => (
     <div className="l-footer">
         Footer
     </div>

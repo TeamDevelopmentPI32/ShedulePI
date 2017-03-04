@@ -1,0 +1,30 @@
+.b-form
+    +element('form-group')
+        display: flex
+        flex-flow: column wrap
+
+    +element('label')
+        font:
+            weight: bold
+        padding:
+            bottom: 10px
+
+    +element('form-control')
+        border: 1px solid $color-dark
+        padding: 16px 16px   
+        border-radius: 3px
+
+        +modifier('invalid')
+            border: 1px solid $color-red
+
+    +element('form-group')
+        margin-bottom: 20px
+
+    +element('error-message')
+        color: $color-red
+        padding: 10px 5px
+        font:
+            size: 13px
+
+    +element('actions')
+        display: flex
