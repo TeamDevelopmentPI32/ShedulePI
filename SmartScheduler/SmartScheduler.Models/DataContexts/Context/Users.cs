@@ -41,6 +41,8 @@ namespace SmartScheduler.Models.DataContexts.Context
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password)) return -1;
 
+            if (Context.Users.Any(x => x.Login == login)) return -1;
+
             var newUser = new DbUser();
             newUser.RegDate = DateTime.Now;
             newUser.Login = login;

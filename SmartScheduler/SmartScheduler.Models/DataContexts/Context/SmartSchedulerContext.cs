@@ -35,6 +35,15 @@ namespace SmartScheduler.Models.DataContexts.Context
 
         private SmartSchedulerContext()
         {
+            try
+            {
+                m_Context.Database.Exists();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No data base connection!!! Check connection string in app settings or check MS SQL process!");
+            }
+            
             Administrators = new Administrators(m_Context);
             Auditories = new Auditories(m_Context);
             ScheduleItems = new ScheduleItems(m_Context);
