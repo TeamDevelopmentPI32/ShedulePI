@@ -31,7 +31,7 @@ namespace SmartScheduler.Models.DataContexts.Context
         {
             get
             {
-                return Context.Groups.Select(x=>x.Convert());
+                return Context.Groups.ToList().Select(x=>x.Convert());
             }
         }
 

@@ -27,7 +27,7 @@ namespace SmartScheduler.Models.DataContexts.Context
         {
             get
             {
-                return Context.Schedules.Select(x=>x.Convert());
+                return Context.Schedules.ToList().Select(x=>x.Convert());
             }
         }
 

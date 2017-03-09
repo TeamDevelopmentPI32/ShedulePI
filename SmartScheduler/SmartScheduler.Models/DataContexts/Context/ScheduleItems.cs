@@ -35,12 +35,12 @@ namespace SmartScheduler.Models.DataContexts.Context
 
         public IEnumerable<ScheduleItem> GetAllShceduleItems(Func<DbScheduleItem, bool> predicat)
         {
-            return Context.ScheduleItems.Where(x=> predicat(x)).Select(x => x.Convert());
+            return Context.ScheduleItems.Where(x=> predicat(x)).ToList().Select(x => x.Convert());
         }
 
         public IEnumerable<ScheduleItem> GetAuditoryScheduleItems(int auditoryId)
         {
-            return Context.ScheduleItems.Where(x => x.AuditoryId == auditoryId).Select(x => x.Convert());
+            return Context.ScheduleItems.Where(x => x.AuditoryId == auditoryId).ToList().Select(x => x.Convert());
         }
 
         public ScheduleItem GetScheduleItem(int id)
@@ -54,17 +54,17 @@ namespace SmartScheduler.Models.DataContexts.Context
 
         public IEnumerable<ScheduleItem> GetStudentScheduleItems(int studentId)
         {
-            return Context.ScheduleItems.Where(x => x.Group.StudentsInGroups.Any(y => y.StudentId == studentId)).Select(x => x.Convert());
+            return Context.ScheduleItems.Where(x => x.Group.StudentsInGroups.Any(y => y.StudentId == studentId)).ToList().Select(x => x.Convert());
         }
 
         public IEnumerable<ScheduleItem> GetSubjectScheduleItems(int subjectId)
         {
-            return Context.ScheduleItems.Where(x => x.SubjectId == subjectId).Select(x => x.Convert());
+            return Context.ScheduleItems.Where(x => x.SubjectId == subjectId).ToList().Select(x => x.Convert());
         }
 
         public IEnumerable<ScheduleItem> GetTeacherScheduleItems(int teacherId)
         {
-            return Context.ScheduleItems.Where(x => x.TeacherId == teacherId).Select(x => x.Convert());
+            return Context.ScheduleItems.Where(x => x.TeacherId == teacherId).ToList().Select(x => x.Convert());
         }
     }
 

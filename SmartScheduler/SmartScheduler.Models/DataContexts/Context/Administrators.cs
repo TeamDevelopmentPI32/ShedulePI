@@ -32,7 +32,7 @@ namespace SmartScheduler.Models.DataContexts.Context
         {
             get
             {
-                return Context.Administators.Select(x => x.Convert(null));
+                return Context.Administators.ToList().Select(x => x.Convert(null));
             }
         }
 
