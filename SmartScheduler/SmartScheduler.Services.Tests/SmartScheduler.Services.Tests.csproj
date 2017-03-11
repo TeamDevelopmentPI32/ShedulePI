@@ -91,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SubjectsControllerTest.cs" />
+    <Compile Include="Controllers\GroupsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
@@ -102,6 +104,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SmartScheduler.Models\SmartScheduler.Models.csproj">
+      <Project>{87932C32-091A-408E-A320-434703ACEE79}</Project>
+      <Name>SmartScheduler.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartScheduler.Services\SmartScheduler.Services.csproj">
       <Project>{620537B9-D3B5-41E0-B67D-60BE4B123A4F}</Project>
       <Name>SmartScheduler.Services</Name>
