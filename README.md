@@ -1,9 +1,5 @@
 # ShedulePI
 
-> Back-end logs here
-
-# UI Set up
-
 > NOTE! To set up UI project on your own machine you should install latest version of [NodeJS](https://nodejs.org/en/)
 
 ## Install dependencies
