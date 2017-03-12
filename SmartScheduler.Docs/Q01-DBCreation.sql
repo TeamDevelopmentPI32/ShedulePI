@@ -1,6 +1,4 @@
 CREATE DATABASE SmartScheduler;
-GO
-USE [SmartScheduler]
 CREATE TABLE [User]
 (
 userId INT IDENTITY(1,1) PRIMARY KEY,
