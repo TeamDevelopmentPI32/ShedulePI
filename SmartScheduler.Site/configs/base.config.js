@@ -7,7 +7,7 @@ module.exports = function() {
     return {
         
         entry: {
-            'app': './src/index.jsx',
+            'app': './src/app.jsx',
             'vendor': './src/vendor.js'
         },
 

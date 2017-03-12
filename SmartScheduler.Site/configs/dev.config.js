@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(env) {
     return webpackMerge(commonConfig(), {
-    devtool: 'eval',
+    devtool: 'cheap-module-source-map',
 
     output: {
         path: path.join(__dirname, '../build'),
