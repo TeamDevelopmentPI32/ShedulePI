@@ -44,5 +44,18 @@ namespace SmartScheduler.Models.Helpers
             }
             return sb.ToString();
         }
+
+        public static void ClearAllSessions()
+        {
+            Sessions.Clear();
+        }
+
+        public static bool ClearSession(string token)
+        {
+            if (!Sessions.ContainsKey(token)) return false;
+
+            Sessions.Remove(token);
+            return true;
+        }
     }
 }
