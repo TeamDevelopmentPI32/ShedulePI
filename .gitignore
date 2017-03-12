@@ -60,7 +60,6 @@ artifacts/
 *.tmp
 *.tmp_proj
 *.log
-*.log.*
 *.vspscc
 *.vssscc
 .builds
@@ -211,7 +210,3 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-
-# Visual Studio Code
-
-.vscode
