@@ -112,7 +112,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmartSchedulerDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Interfaces.cs" />
     <Compile Include="Models\ScheduleItem.cs" />

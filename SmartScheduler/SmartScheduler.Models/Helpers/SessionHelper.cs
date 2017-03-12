@@ -8,7 +8,7 @@ namespace SmartScheduler.Models.Helpers
 {
     public static class SessionHelper
     {
-        private static Dictionary<string, int> Sessions = new Dictionary<string, int>();
+        private static Dictionary<string, int> Sessions;
 
         public static string CreateSession(int userId)
         {
