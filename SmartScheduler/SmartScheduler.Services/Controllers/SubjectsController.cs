@@ -1,4 +1,5 @@
 ﻿using SmartScheduler.Models.Models;
+using SmartScheduler.Services.Filters;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -72,20 +73,16 @@ namespace SmartScheduler.Services.Controllers
         //Добавить предмет в БД
         //Ok(200) - если предмет нормально добавился
         //BadRequest(400) - в случаи, если предмет уже есть(да, 400-е сообщение тут не очень подходит логически, но блин...
-        [Route("")]
+        [RequireAuthorization(Role = "admin")]
         [HttpPost]
-        public IHttpActionResult AddSubject([FromBody]string name)
+        public IHttpActionResult AddSubject([FromBody]Subject subject)
         {
-            if (name != null)
+            if (subject != null)
             {
-                var arguments = name.Split(' ');
-                if (arguments.Count() <= 2)
+                var index = SmartScheduler.Models.DataContexts.Context.SmartSchedulerContext.Instance.Subjects.AddSubjects(arguments[0]);
+                if (index >= 0)
                 {
-                    var index = SmartScheduler.Models.DataContexts.Context.SmartSchedulerContext.Instance.Subjects.AddSubjects(arguments[0]);
-                    if (index >= 0)
-                    {
-                        return Ok();
-                    }
+                       return Ok();
                 }
             }
             return BadRequest();
@@ -96,7 +93,7 @@ namespace SmartScheduler.Services.Controllers
         //Ok(200) - если предмет нормально удалился
         //BadRequst(400) - если неверный формат тела запроса
         //NotFound(404) - если не найден предмет с получеными данными
-        [Route("")]
+        [RequireAuthorization(Role = "admin")]
         [HttpDelete]
         public IHttpActionResult DeleteSubject([FromBody]string input)
         {

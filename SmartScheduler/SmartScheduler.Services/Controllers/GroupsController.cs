@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace SmartScheduler.Services.Controllers
 {
-    [Route("api/groups")]
+    [RoutePrefix("api/groups")]
     public class GroupsController : ApiController
     {
         //Вернуть список всех груп
