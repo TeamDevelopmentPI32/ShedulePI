@@ -385,23 +385,6 @@ VALUES
 ('Програмування для мобільних платформ', CONVERT(int, FLOOR(RAND() * 10))%6 + 1),
 ('Основи охорони праці', CONVERT(int, FLOOR(RAND() * 10))%6 + 1)
 
-
---INSERT INTO StudentsInGroups(groupId, studentId)
---SELECT CONVERT(int, FLOOR(RAND() * 2000))%(SELECT COUNT(groupId) FROM [Group]) + 
---										  (SELECT MIN(groupId) FROM [Group]), studentId
---FROM Student
-
---INSERT INTO [USER](login, password, regDate, lastActivityDate)
---SELECT name + '_' + surname, surname + UPPER(name), DATEADD(DAY, ABS(CHECKSUM(NEWID()) % 3650), '2000-01-01'), SYSDATETIME()
---from Student
-
---INSERT INTO Student(userId)
---SELECT userId
---FROM [User] u
---	JOIN Student on u.login =  Student.name + '_' + Student.surname
-
---SELECT DATEADD(DAY, ABS(CHECKSUM(NEWID()) % 3650), '2000-01-01')
-
 DROP TABLE TempMaleFirstNames
 DROP TABLE TempMaleLastNames
 DROP TABLE TempMaleMiddleNames
